@@ -2,12 +2,19 @@ import Head from "next/head";
 import Image from "next/image";
 import logo from "../public/icon/logo.svg";
 import { useEffect, useRef } from "react";
-import Navbar from "../component/Navbar";
-import Thumbnail from "../component/Thumbnail";
+import Navbar from "../components/Navbar";
+import Thumbnail from "../components/Thumbnail";
+import Footer from "../components/Footer";
+import { useState } from "react";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
   const mask = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(1);
+
+  const onClickLeft = () => setPage(page - 1);
+
+  const onClickRight = () => setPage(page + 1);
   return (
     <div>
       <Head>
@@ -16,14 +23,19 @@ export default function Home() {
         <link rel="shortcut icon" href="/actkathonicon.png" />
       </Head>
 
-      <Navbar/>
-
-      <div className="content flex justify-center place-items-center h-screen">
-        <div className="">
-          <Thumbnail></Thumbnail>
-        </div>
+      <div>
+        <Navbar />
       </div>
 
+      <div className="transform content flex justify-center place-items-center w-screen h-screen">
+        <div onClick={onClickLeft}> {`<`} </div>
+        <Thumbnail currentPage={page} />
+        <div onClick={onClickRight}> {`>`} </div>
+      </div>
+
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 }

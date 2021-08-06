@@ -5,7 +5,10 @@
 .content {
     background-color:#F0EEE9;
 }
+
 body {
+  overflow:hidden;
+  padding:0;
   margin: 0;
 }
 .pic {
@@ -30,3 +33,6 @@ body {
     background-color:#F3CFB5;
 }
 
+.footer {
+  background-color:#000000;
+}

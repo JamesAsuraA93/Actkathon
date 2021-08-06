@@ -8,8 +8,8 @@ import Search from "./Search";
 export default function Navbar() {
   return (
     <>
-      <div className="flex justify-between w-full navcolor fixed">
-        <div className="flex flex-rows">
+      <div className="flex justify-between w-full navcolor fixed shadow-lg">
+        <div className="flex flex-rows m-3">
           <Image
             src={iconnavbar}
             alt="Picture of the author"
@@ -18,12 +18,12 @@ export default function Navbar() {
           />
         </div>
 
-        <div>
-            <Search></Search>
+        <div className="mt-5">
+            <Search/>
         </div>
 
-        <div>
-         <Selectbar></Selectbar>
+        <div className="mt-3">
+         <Selectbar/>
         </div>
 
       </div>
