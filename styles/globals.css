@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.content {
+    background-color:#F0EEE9;
+}
 body {
   margin: 0;
 }
@@ -22,3 +25,8 @@ body {
   left: 0px;
   height: 100%;
 }
+
+.navcolor {
+    background-color:#F3CFB5;
+}
+
