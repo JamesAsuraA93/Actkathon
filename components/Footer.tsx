@@ -33,7 +33,7 @@ export default function Footer() {
   }
   return (
     <>
-      <div className="flex justify-between footer w-full fixed bottom-0">
+      <div className="flex justify-between footer w-full fixed bottom-0 pb-4">
         <div className="flex flex-row gap-1 mt-2 ml-3">
           <div>
             <Image

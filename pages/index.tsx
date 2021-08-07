@@ -90,7 +90,7 @@ export default function Home() {
     <>
       {!isInPage && (
         <div
-          className="h-screen w-screen m-0 p-0 z-50 bg-black bg-opacity-50 absolute"
+          className="h-screen w-screen m-0 p-0 z-50 bg-black bg-opacity-70 absolute"
           style={{ backdropFilter: "blur(10px)" }}
         >
           <div className="flex justify-around text-center justify-items- w-full h-full">
@@ -98,7 +98,7 @@ export default function Home() {
 
               <div className="h-auto w-auto">
               <CheckIn/>
-              <div className="bg-gray-300 bg-opacity-70 rounded-b-lg h-auto w-96">
+              <div className="bg-gray-300 bg-opacity-90 rounded-b-lg h-auto w-96">
               <button className="h-auto"  onClick={onEnterPage}> <ion-icon name="arrow-forward-circle" size="large"></ion-icon> </button>
               </div>
               </div>

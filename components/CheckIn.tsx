@@ -1,7 +1,7 @@
 export default function CheckIn() {
   return (
     <>
-      <div className="grid justify-items-center mt-32 w-96 h-56 bg-gray-300 rounded-t-lg bg-opacity-70 ">
+      <div className="grid justify-items-center mt-32 w-96 h-56 bg-gray-300 rounded-t-lg bg-opacity-90  ">
         <div className="mt-8 py-0">
           <label
             htmlFor="location"
