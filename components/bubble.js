@@ -2,7 +2,7 @@ import { data } from "autoprefixer";
 import { useEffect, useRef } from "react";
 export default (props) => {
   useEffect(() => {
-    // window.document.querySelector("#my_dataviz").innerHTML = "";
+    window.document.querySelector("#my_dataviz").innerHTML = "";
     if (window.d3) {
       console.log("d3 is loaded");
 
@@ -17,8 +17,14 @@ export default (props) => {
         .attr("height", 450)
         .attr("class", "mx-auto");
 
+      const max = Math.max(
+        ...props.data.map(({ _source }) => {
+          return _source.projectMoney;
+        })
+      );
+
       var data = props.data.map(({ _source }) => {
-        let s = _source.projectMoney / 100000;
+        let s = _source.projectMoney / (max / 50);
         if (s < 3) s = 3;
         if (s > 100) s = 100;
         return {
@@ -50,7 +56,7 @@ export default (props) => {
             .x(width / 2)
             .y(height / 2)
         ) // Attraction to the center of the svg area
-        .force("charge", d3.forceManyBody().strength(0.5)) // Nodes are attracted one each other of value is > 0
+        .force("charge", d3.forceManyBody().strength(0.1)) // Nodes are attracted one each other of value is > 0
         .force(
           "collide",
           d3.forceCollide().strength(0.01).radius(20).iterations(1)

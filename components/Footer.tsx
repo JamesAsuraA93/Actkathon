@@ -15,7 +15,7 @@ const customStyles = {
   },
 };
 
-export default function Footer() {
+export default function Footer(props) {
   let subtitle:any;
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <Modal/>
+          <Modal location={props.location} voter={props.voter} occupation={props.occupation}/>
         </div>
       </div>
     </>

@@ -8,7 +8,7 @@ import {
 } from "../data";
 import Bubble from "./bubble";
 
-export default function Modal() {
+export default function Modal(props) {
   const [showModal, setShowModal] =useState(false);
   const router = useRouter()
   const { id } = router.query
@@ -17,13 +17,14 @@ export default function Modal() {
   const [currentData, setCurrentData] = useState({ _source: { winner: [] } });
   const [winnerData, setWinnerData] = useState([]);
   const preference = {
-    occupation: "student", // "police" "doctor"
-    location: "กรุงเทพมหานคร",
-    projectId: "63027000185",
+    occupation: props.occupation, // "police" "doctor"
+    location: props.location,
+    projectId: id,
   };
 
   useEffect(() => {
     (async () => {
+      if(id){
       const data = await fetchDataACT(query(preference));
       setActDoc(data);
       const _currentData = data.find((i) => {
@@ -38,9 +39,9 @@ export default function Modal() {
           ({ _source }) =>
             _source.winnerName[0] == _currentData._source.winnerName[0]
         )
-      );
+      );}
     })();
-  }, []);
+  }, [id]);
   console.log(actDoc);
   console.log(winnerData);
 
@@ -49,17 +50,23 @@ export default function Modal() {
     {id!=""&&id!=undefined ? (
         <>
           <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            className=" justify-center items-center flex  fixed inset-0 z-50 outline-none focus:outline-none"
             style={{zIndex:99}}
           >
-            <div style={{zIndex:99}} className="relative rounded-xl my-6 mx-auto max-w-2xl w-full bg-white border-4 border-earth-green h-4/5">
-            <div style={{zIndex:99}} className="p-3 border-b-4 border-earth-green ">
-            โครงการ Test
+            <div style={{zIndex:99}} className="overflow-hidden relative rounded-xl my-6 mx-auto max-w-2xl w-full bg-white border-4 border-earth-green h-4/5">
+            <div style={{zIndex:99}} className="p-3 border-b-4 border-earth-green flex justify-between">
+              <div className="">{currentData._source.projectName}</div>
+              <div className="">
+            <ion-icon className="cursor-pointer"icon="close" size="lg" onClick={()=>{
+              router.push("/");
+            }}></ion-icon>
             </div>
-    <div className="">
+            </div>
+            
+    <div className="h-full overflow-scroll pb-24">
       <div className="">
         <div className="p-5">
-          <div className="pb-3 font-bold text-xl font-iconic">
+          <div className="pb-3 font-bold text-xl ">
             ลองอ่านข้อมูลนี้แบบคร่าวๆ
           </div>
           <div className="flex">
@@ -97,9 +104,9 @@ export default function Modal() {
         <div className="px-5">
           <div className="flex text-sm mt-2">
             <div className="h-3 w-3 mt-1 bg-green-600"></div>
-            <div className="px-3"> คือโครงการที่เคยทำ</div>
+            <div className="px-3"> คือโครงการที่{currentData._source.winnerName}เคยทำ</div>
             <div className="h-3 w-3 mt-1 bg-red-600"></div>
-            <div className="px-3"> คือโครงการที่เคยทำและมีการทุจริต</div>
+            <div className="px-3"> คือโครงการที่{currentData._source.winnerName}เคยทำและมีการทุจริต</div>
           </div>
 
           <div className="flex flex-wrap">
@@ -125,15 +132,24 @@ export default function Modal() {
           </div>
         </div>
         <div className="p-5">
-          <div className="pb-1 font-bold text-xl font-iconic">
+          <div className="pb-1 font-bold text-xl ">
             คุณเห็นโปรเจ็คนี้รอบตัวคุณไหม?
           </div>
-          <div className="pb-3 font-iconic">
+          <div className="pb-3 ">
             ถ้าเห็น คุณรู้สึกว่าราคาด้านบนสมเหตุสมผลไหม
             เมื่อเทียบผลกระทบของโครงการนี้ที่มีต่อชีวิตคุณ? ถ้าไม่เห็น
             คุณคิดว่าราคานี้สมเหตุสมผลไหม
           </div>
         </div>
+        <div className="px-5 pb-5 flex text-sm">
+        <div className="border-earth-green border-2 p-3" onClick={()=>props.voter[1]([...props.voter[0],{id:id,status:"ok"}])}>
+          สมเหตุสมผล
+        </div>
+        <div className="ml-3 border-red-400 border-2 p-3" onClick={()=>props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}])}>
+          อาจมีการทุจริต
+        </div>
+        </div>
+        
       </div>
     </div>
 

@@ -5,7 +5,7 @@ import "react-toggle/style.css"
 import Selectbar from "./Selectbar";
 import Search from "./Search";
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <>
       <div className="font-iconic text-lg flex justify-between w-full navcolor fixed z-40">
@@ -19,7 +19,7 @@ export default function Navbar() {
         </div>
 
         <div className="mt-5">
-            <Search/>
+            <Search searcher={props.searcher}/>
         </div>
 
         <div className="mt-3 mr-4 w-48">

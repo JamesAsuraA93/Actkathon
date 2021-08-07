@@ -9,67 +9,62 @@ import Data, { Proovestate } from "../models/data_doc";
 import Topic from "../components/Topic";
 import KomChat from "./services/chat";
 import CheckIn from "../components/CheckIn";
-
+import {
+  fetchDataACT,
+  query,
+  queryByProject,
+  generateFromOccupation,
+} from "../data";
 
 export default function Home() {
   const router = useRouter()
   const { id } = router.query
   const ref = useRef<HTMLDivElement>(null);
   const mask = useRef<HTMLDivElement>(null);
-  const [page, setPage] = useState(1);
-  const [isInPage, setInPage] = useState(false);
+  const [page, setPage] = useState(2);
+  const [isInPage, setInPage] = useState(id != undefined);
 
-  const document1: Data = {
-    id: 64001,
-    detailMoney: "12ล้าน",
-    detailName: "โครงการปะลุกกะลิก",
-    prooveState: Proovestate.UNMARK,
-  };
-  const document2: Data = {
-    id: 64002,
-    detailMoney: "7.9ล้าน",
-    detailName: "โครงการมีนเองรักเจมส์นะจ๊ะ",
-    prooveState: Proovestate.UNMARK,
-  };
-  const document3: Data = {
-    id: 64003,
-    detailMoney: "33ล้าน",
-    detailName: "โครงการมีนเองรักเจมส์นะจ๊ะ",
-    prooveState: Proovestate.UNMARK,
-  };
-  const document4: Data = {
-    id: 64004,
-    detailMoney: "12M",
-    detailName: "โครงการมีนเองรักเจมส์นะจ๊ะ",
-    prooveState: Proovestate.UNMARK,
-  };
-  const document5: Data = {
-    id: 64005,
-    detailMoney: "12M",
-    detailName: "โครงการมีนเองรักเจมส์นะจ๊ะ",
-    prooveState: Proovestate.UNMARK,
-  };
-  const document6: Data = {
-    id: 64006,
-    detailMoney: "12M",
-    detailName: "โครงการมีนเองรักเจมส์นะจ๊ะ",
-    prooveState: Proovestate.UNMARK,
-  };
+  const [actDoc, setActDoc] = useState([]);
+  const [currentData, setCurrentData] = useState({ _source: { winner: [] } });
+  const [winnerData, setWinnerData] = useState([]);
+  const [preference, setPref] = useState({
+    occupation: "student", // "police" "doctor"
+    location: "กรุงเทพมหานคร",
+  });
 
-  const data: Data[] = [
-    document1,
-    document2,
-    document3,
-    document4,
-    document5,
-    document6,
-    document1,
-    document2,
-    document3,
-    document4,
-    document5,
-    document6,
-  ];
+  const [voteState, setVoteState] = useState([]);
+  const [search, setSearchKey] = useState("");
+
+  useEffect(() => {
+    if(search == ""){
+    console.log("search");
+
+    (async () => {
+      const data = await fetchDataACT(query(preference));
+      setActDoc(data);
+    })();
+  }else{
+    console.log("search project");
+
+    (async () => {
+      const data = await fetchDataACT(queryByProject(search));
+      setActDoc(data);
+    })();
+  }
+  }, [preference,search]);
+  
+  const [data,setData] = useState([])
+ useEffect( ()=>{
+   setData(actDoc.map(({_source})=>{
+    return {
+      id: _source.projectId,
+      detailMoney: _source.projectMoney,
+      detailName: _source.projectName,
+      prooveState: Proovestate.UNMARK,
+      vote: voteState.find(v=>v.id==_source.projectId)?.status,
+    }
+  }))
+},[voteState,actDoc])
 
   const onClickLeft = () => {
     if (page <= 1) {
@@ -87,15 +82,8 @@ export default function Home() {
 
   const onEnterPage = () => {
     setInPage(!isInPage);
+    setPage(1)
   };
-
-  useEffect(()=>{
-    if(id){
-      setInPage(!isInPage);
-    }
-  },[id])
-
-
 
   return (
     <>
@@ -108,9 +96,17 @@ export default function Home() {
             <div>
 
               <div className="h-auto w-auto">
-              <CheckIn/>
+              <CheckIn onChange={(occupation,location)=>{
+setPref({
+  occupation,
+  location,
+
+})
+              }}/>
               <div className="bg-gray-300 bg-opacity-90 rounded-b-lg h-auto w-96">
-              <button className="h-auto"  onClick={onEnterPage}> <ion-icon name="arrow-forward-circle" size="large"></ion-icon> </button>
+              <div className="h-auto font-iconic p-3 bg-earth-green rounded-b-lg cursor-pointer"  onClick={onEnterPage}> 
+              เพิ่มความโปร่งใส!
+              </div>
               </div>
               </div>
 
@@ -126,7 +122,7 @@ export default function Home() {
         </Head>
 
         <div>
-          <Navbar />
+          <Navbar searcher={[search, setSearchKey]} />
         </div>
         
         {/* <div className="grid grid-cols-7 content mt-6 pt-24 mb-0 pb-0">
@@ -169,7 +165,7 @@ export default function Home() {
             </div>
           </div>
           {isInPage && <KomChat />}
-          <Footer />
+          <Footer occupation={preference.occupation} location={preference.location} voter={[voteState, setVoteState]} />
         </div>
       </div>
     </>

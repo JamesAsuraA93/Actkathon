@@ -8,5 +8,6 @@ export default interface Data{
 id?:number,
 prooveState?:Proovestate,
 detailName?:string,
-detailMoney?:string
+detailMoney?:string,
+vote?:any
 }

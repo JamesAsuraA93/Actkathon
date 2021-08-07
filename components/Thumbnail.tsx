@@ -4,6 +4,7 @@ import ThumbnailSVG from "../public/documents/doc.svg";
 import Data, { Proovestate } from "../models/data_doc";
 import { useSprings, animated } from "react-spring";
 import Modal from "./Modals";
+import router from "next/router";
 
 
 export default function Thumbnail({
@@ -33,7 +34,6 @@ export default function Thumbnail({
     scale: i <= currentPage - 1 || i >= currentPage + 3 ? 0.7 : 1,
     display: "block",
     opacity: i <= currentPage - 1 || i >= currentPage + 3 ? 0.5 : 1,
-    ...disDoc[i],
     
   }));
 
@@ -52,7 +52,10 @@ export default function Thumbnail({
         (i != 0 && i == currentPage - 1) || i == currentPage + page - 2
           ? 0.5
           : 1;
-      if (i == 0 || i == disDoc.length - 1) opacity = 0;
+
+      if(disDoc[i].vote == "corrupt" || disDoc[i].vote == "ok" )
+              opacity=0.5; 
+      if (i == 0) opacity = 0;
       console.log(currentPage);
       return { x, scale, display: "block", opacity };
     });
@@ -70,6 +73,7 @@ export default function Thumbnail({
             style={{ display, x, scale }}
           >
             <animated.div
+            
               className="w-full h-full"
               style={{
                 width: 184,
@@ -78,17 +82,17 @@ export default function Thumbnail({
                 backgroundImage: `url(/documents/doc.svg)`,
               }}
             ></animated.div>
-           {i > currentPage - 1 && i < currentPage + 4 && <div className="grid justify-items-center m-1">{disDoc[i].detailName}</div>}
-           {i > currentPage - 1 && i < currentPage + 4 && <div className="flex mt-5">
-             <div className="h-12 w-11 border-2 border-earth-green bg-white object-center">
+           {i > currentPage - 1 && i < currentPage + 4 && <div className="grid justify-items-center m-1 text-sm h-24 p-2 overflow-hidden">{disDoc[i].detailName}</div>}
+           {i > currentPage - 1 && i < currentPage + 4 && <div className="flex mt-5" onClick={()=>router.push('/?id='+disDoc[i].id)}>
+             <div className="h-12 w-11 border-2 border-earth-green bg-white object-center" >
                <div className="grid justify-items-center mt-2 text-xl">
-               💸
+               
+               {(disDoc[i].vote == "corrupt" || disDoc[i].vote == "ok" ) ? ((disDoc[i].vote == "corrupt") ? "👎": "👍") :"💸"}
                </div>
               </div>
-             <button className="h-12 w-32 border border-earth-green border-b-2 border-r-2 border-t-2 bg-white">
-               <h1 className="font-normal p-1 font-iconic text-gray-700">ช่วยตรวจสอบ</h1>
-               <Modal/>
-             </button>
+             <div className="h-12 w-32 border border-earth-green text-center border-b-2 border-r-2 border-t-2 bg-white">
+               <h1 className={`font-normal pt-2 font-iconic ${(disDoc[i].vote == "corrupt" || disDoc[i].vote == "ok" ) ? "text-gray-400":"text-gray-700"} `}>{(disDoc[i].vote == "corrupt" || disDoc[i].vote == "ok" ) ? "ตรวจสอบเรียบร้อย":"ช่วยตรวจสอบ"}</h1>
+             </div>
              </div>}
            
           </animated.div>

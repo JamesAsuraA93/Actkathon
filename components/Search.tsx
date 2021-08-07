@@ -1,6 +1,6 @@
 
 
-export default function Search(){
+export default function Search({searcher}){
     return(
         <>
         <div className="border-black">
@@ -9,7 +9,10 @@ export default function Search(){
                     {`ค้นหาโครงการที่คุณสนใจ`}
                 </div>
                 <div className="relative">
-                    <input type="" placeholder="พิมพ์เพื่อค้นหาเลย" className="rounded relative w-64 pl-2 pt-1 h-7 text-sm"/>
+                    <input 
+                    onChange={(e)=>{searcher[1](e.target.value)}}
+                    value={searcher[0]}
+                    placeholder="พิมพ์เพื่อค้นหาเลย" className="rounded relative w-64 pl-2 pt-1 h-7 text-sm"/>
                 <div className="cursor-pointer absolute inset-y-0 right-0 flex items-center mr-1">
                     <ion-icon name="search-outline"></ion-icon>
                 </div>

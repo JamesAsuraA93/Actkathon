@@ -51,6 +51,28 @@ export const query = (preference) => ({
   },
 });
 
+export const queryByProject = (k) => ({
+  size: 20,
+  query: {
+    bool: {
+      must: {
+        match: {
+          projectName: k,
+        },
+      },
+      filter: [
+        {
+          range: {
+            announceDate: {
+              gte: "2020-01-01",
+            },
+          },
+        },
+      ],
+    },
+  },
+});
+
 export const queryWinner = (winnerName, preference) => ({
   size: 30,
   query: {
