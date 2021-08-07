@@ -36,3 +36,46 @@ body {
 .footer {
   background-color:#000000;
 }
+
+@font-face{
+  font-family: "FC Iconic";
+  src: url('./FC Iconic Regular.ttf');
+  weight:300;
+}
+@font-face{
+  font-family: "FC Iconic";
+  src: url('./FC Iconic Bold.ttf');
+  weight:700;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
+.font-sarabun{
+  font-family: 'Sarabun', sans-serif;
+}
+
+.font-iconic{
+  font-family: "FC Iconic";
+  font-weight:300;
+
+}
+
+.kayabX {
+  top:1px;
+  left:1px;
+}
+
+.pics {
+  text-align: center;
+  position: relative;
+  height: 250px;
+}
+.blurs {
+  height: 100%;
+}
+.overlays {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+}

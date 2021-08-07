@@ -5,8 +5,8 @@ export enum Proovestate{
 }
 
 export default interface Data{
-id:number,
-prooveState:Proovestate,
-detailName:string,
-detailMoney:string
+id?:number,
+prooveState?:Proovestate,
+detailName?:string,
+detailMoney?:string
 }
