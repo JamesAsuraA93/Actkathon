@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Thumbnail from "../components/Thumbnail";
@@ -17,8 +17,8 @@ import {
 } from "../data";
 
 export default function Home() {
-  const router = useRouter()
-  const { id } = router.query
+  const router = useRouter();
+  const { id } = router.query;
   const ref = useRef<HTMLDivElement>(null);
   const mask = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(2);
@@ -36,35 +36,38 @@ export default function Home() {
   const [search, setSearchKey] = useState("");
 
   useEffect(() => {
-    if(search == ""){
-    console.log("search");
+    if (search == "") {
+      console.log("search");
 
-    (async () => {
-      const data = await fetchDataACT(query(preference));
-      setActDoc(data);
-    })();
-  }else{
-    console.log("search project");
+      (async () => {
+        const data = await fetchDataACT(query(preference));
+        setActDoc(data);
+      })();
+    } else {
+      console.log("search project");
 
-    (async () => {
-      const data = await fetchDataACT(queryByProject(search));
-      setActDoc(data);
-    })();
-  }
-  }, [preference,search]);
-  
-  const [data,setData] = useState([])
- useEffect( ()=>{
-   setData(actDoc.map(({_source})=>{
-    return {
-      id: _source.projectId,
-      detailMoney: _source.projectMoney,
-      detailName: _source.projectName,
-      prooveState: Proovestate.UNMARK,
-      vote: voteState.find(v=>v.id==_source.projectId)?.status,
+      (async () => {
+        const data = await fetchDataACT(queryByProject(search));
+        setActDoc(data);
+      })();
     }
-  }))
-},[voteState,actDoc])
+  }, [preference, search]);
+
+  const [data, setData] = useState<any>([]);
+
+  useEffect(() => {
+    setData(
+      actDoc.map(({ _source }) => {
+        return {
+          id: _source.projectId,
+          detailMoney: _source.projectMoney,
+          detailName: _source.projectName,
+          prooveState: Proovestate.UNMARK,
+          vote: voteState.find((v) => v.id == _source.projectId)?.status,
+        };
+      })
+    );
+  }, [voteState, actDoc]);
 
   const onClickLeft = () => {
     if (page <= 1) {
@@ -82,7 +85,7 @@ export default function Home() {
 
   const onEnterPage = () => {
     setInPage(!isInPage);
-    setPage(1)
+    setPage(1);
   };
 
   return (
@@ -94,22 +97,21 @@ export default function Home() {
         >
           <div className="flex justify-around text-center justify-items- w-full h-full">
             <div>
-
               <div className="h-auto w-auto">
-              <CheckIn onChange={(occupation,location)=>{
-setPref({
-  occupation,
-  location,
-
-})
-              }}/>
-              <div className="bg-gray-300 bg-opacity-90 rounded-b-lg h-auto w-96">
-              <div className="h-auto font-iconic p-3 bg-earth-green rounded-b-lg cursor-pointer"  onClick={onEnterPage}> 
-              เพิ่มความโปร่งใส!
+                <CheckIn
+                  onChange={(occupation: any, location: any) => {
+                    setPref({ occupation, location });
+                  }}
+                />
+                <div className="bg-gray-300 bg-opacity-90 rounded-b-lg h-auto w-96">
+                  <div
+                    className="h-auto font-iconic p-3 bg-earth-green rounded-b-lg cursor-pointer"
+                    onClick={onEnterPage}
+                  >
+                    เพิ่มความโปร่งใส!
+                  </div>
+                </div>
               </div>
-              </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -124,21 +126,20 @@ setPref({
         <div>
           <Navbar searcher={[search, setSearchKey]} />
         </div>
-        
-        {/* <div className="grid grid-cols-7 content mt-6 pt-24 mb-0 pb-0">
-          <div className="col-start-3 col-span-5">
+
+        <div className="grid grid-cols-9 content mt-6 pt-24 mb-0 pb-0">
+          <div className="col-start-3 col-span-5 ml-20 pr-10">
             <Topic />
           </div>
-        </div> */}
-<div className="absolute flex w-screen">
-          <div className="mx-auto w-92 mt-32" style={{width:490}}>
-            <Topic />
-            <div className="w-full text-center mt-12">
-              <h3 className="font-black text-lg font-iconic">
-                โครงการรอบตัวคุณ
-              </h3>
-            </div>
+          <div className="col-start-5 col-end-6 mt-16 -mb-20">
+            <h3 className="font-black text-lg font-iconic">โครงการรอบตัวคุณ</h3>
+          </div>
         </div>
+        <div className="absolute flex w-screen">
+          <div className="mx-auto w-92 mt-32" style={{ width: 490 }}>
+            {/* <Topic /> */}
+            <div className="w-full text-center mb-12"></div>
+          </div>
         </div>
 
         <div className="h-full font-sarabun pt-0 mt-24">
@@ -146,14 +147,20 @@ setPref({
             <div className="w-full">
               <div className="flex flex-row justify-center place-items-center w-full h-full m-0 p-0">
                 <div
-                  className={page <= 1 ? "opacity-0" : ""}
+                  className={
+                    page <= 1 ? "hidden cursor-pointer" : "cursor-pointer"
+                  }
                   onClick={onClickLeft}
                 >
                   <ion-icon name="chevron-back-outline" size="large"></ion-icon>
                 </div>
                 <Thumbnail currentPage={page} data={data} />
                 <div
-                  className={page >= data.length - 3 ? "opacity-0" : ""}
+                  className={
+                    page >= data.length - 3
+                      ? "hidden cursor-pointer"
+                      : "cursor-pointer"
+                  }
                   onClick={onClickRight}
                 >
                   <ion-icon
@@ -165,7 +172,11 @@ setPref({
             </div>
           </div>
           {isInPage && <KomChat />}
-          <Footer occupation={preference.occupation} location={preference.location} voter={[voteState, setVoteState]} />
+          <Footer
+            occupation={preference.occupation}
+            location={preference.location}
+            voter={[voteState, setVoteState]}
+          />
         </div>
       </div>
     </>

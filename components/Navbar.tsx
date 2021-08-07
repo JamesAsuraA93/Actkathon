@@ -5,7 +5,7 @@ import "react-toggle/style.css"
 import Selectbar from "./Selectbar";
 import Search from "./Search";
 
-export default function Navbar(props) {
+export default function Navbar(props:any) {
   return (
     <>
       <div className="font-iconic text-lg flex justify-between w-full navcolor fixed z-40">

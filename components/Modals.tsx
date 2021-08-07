@@ -8,7 +8,7 @@ import {
 } from "../data";
 import Bubble from "./bubble";
 
-export default function Modal(props) {
+export default function Modal(props:any) {
   const [showModal, setShowModal] =useState(false);
   const router = useRouter()
   const { id } = router.query
@@ -45,6 +45,8 @@ export default function Modal(props) {
   console.log(actDoc);
   console.log(winnerData);
 
+  if (!currentData) return <pre>...</pre>
+
   return (
     <>
     {id!=""&&id!=undefined ? (
@@ -55,9 +57,9 @@ export default function Modal(props) {
           >
             <div style={{zIndex:99}} className="overflow-hidden relative rounded-xl my-6 mx-auto max-w-2xl w-full bg-white border-4 border-earth-green h-4/5">
             <div style={{zIndex:99}} className="p-3 border-b-4 border-earth-green flex justify-between">
-              <div className="">{currentData._source.projectName}</div>
-              <div className="">
-            <ion-icon className="cursor-pointer"icon="close" size="lg" onClick={()=>{
+              <div className="">{currentData?._source?.projectName ?? ""}</div>
+              <div className="cursor-pointer">
+            <ion-icon icon="close" size="lg" onClick={()=>{
               router.push("/");
             }}></ion-icon>
             </div>
@@ -74,39 +76,39 @@ export default function Modal(props) {
               โครงการนี้ใช้งบประมาณ
             </div>
             <div className="self-stretch mx-1 text-xl font-bold">
-              {currentData._source.projectMoney}
+              {currentData?._source?.projectMoney ?? ""}
             </div>
             <div className="text-sm text-gray-600 pt-1">บาท</div>
           </div>
           <div className="flex">
             <div className="text-sm text-gray-600 pt-1">โครงการนี้เป็นของ</div>
             <div className="self-stretch mx-1 font-bold">
-              {currentData._source.departmentName}
+              {currentData?._source?.departmentName ?? ""}
             </div>
           </div>
           <div className="flex">
             <div className="text-sm text-gray-600 pt-1">ในเขต</div>
             <div className="self-stretch mx-1 font-bold">
-              {currentData._source.district}
+              {currentData?._source?.district ?? ""}
             </div>
           </div>
           <div className="">
             <div className="text-sm text-gray-600 pt-1">โดยโครงการนี้จะ</div>
             <div className="ml-1 font-bold">
-              {currentData._source.projectName}
+              {currentData?._source?.projectName ?? ""}
             </div>
           </div>
         </div>
         <div className="px-5 flex">
           <div className="text-sm text-gray-600 pt-1">ผู้ชนะการประมูลคือ</div>
-          <div className="ml-1 font-bold">{currentData._source.winnerName}</div>
+          <div className="ml-1 font-bold">{currentData?._source?.winnerName ?? ""}</div>
         </div>
         <div className="px-5">
           <div className="flex text-sm mt-2">
             <div className="h-3 w-3 mt-1 bg-green-600"></div>
-            <div className="px-3"> คือโครงการที่{currentData._source.winnerName}เคยทำ</div>
+            <div className="px-3"> คือโครงการที่{currentData?._source?.winnerName ?? ""}เคยทำ</div>
             <div className="h-3 w-3 mt-1 bg-red-600"></div>
-            <div className="px-3"> คือโครงการที่{currentData._source.winnerName}เคยทำและมีการทุจริต</div>
+            <div className="px-3"> คือโครงการที่{currentData?._source?.winnerName ?? ""}เคยทำและมีการทุจริต</div>
           </div>
 
           <div className="flex flex-wrap">
@@ -142,10 +144,10 @@ export default function Modal(props) {
           </div>
         </div>
         <div className="px-5 pb-5 flex text-sm">
-        <div className="border-earth-green border-2 p-3" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
+        <div className="transition-all delay-100 border-earth-green border-2 p-3 cursor-pointer hover:bg-earth-green hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
           สมเหตุสมผล
         </div>
-        <div className="ml-3 border-red-400 border-2 p-3" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
+        <div className="transition-all delay-100 ml-3 border-red-400 border-2 p-3 cursor-pointer hover:bg-red-400 hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
           อาจมีการทุจริต
         </div>
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function CheckIn(props) {
+export default function CheckIn(props:any) {
 const [occupation,setOccupation] = useState("")
 const [location,setLocation] = useState("")
   useEffect(()=>{
@@ -33,12 +33,12 @@ const [location,setLocation] = useState("")
         </div>
         <div className="font-sarabun">
             <label htmlFor="asking">
-            <h2 className="text-xl font-bold mb-2 font-iconic">คุณใกล้เคียงใครในนี้ที่สุด ?</h2>
+            <h2 className="text-xl font-bold mb-2 font-iconic">ต้องการจะตรวจสอบหน่วยงานไหนคะ ?</h2>
             </label>
-            <button onClick={()=>setOccupation("student")} className="px-3 py-1 hover:bg-gray-700 rounded-lg hover:text-white">นักเรียน</button>
-            <button onClick={()=>setOccupation("doctor")} className="px-3 py-1 hover:bg-gray-700 rounded-lg hover:text-white">พยาบาล</button>
-            <button onClick={()=>setOccupation("police")} className="px-3 py-1 hover:bg-gray-700 rounded-lg hover:text-white">ตำรวจ</button>
-            <button onClick={()=>setOccupation("any")} className="px-3 py-1 hover:bg-gray-700 rounded-lg hover:text-white">ประชาชนธรรมดา</button>
+            <button onClick={()=>setOccupation("student")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "student" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>นักเรียน</button>
+            <button onClick={()=>setOccupation("doctor")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "doctor" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>พยาบาล</button>
+            <button onClick={()=>setOccupation("police")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "police" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>ตำรวจ</button>
+            <button onClick={()=>setOccupation("any")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "any" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>ประชาชนธรรมดา</button>
         </div>
       </div>
     </>

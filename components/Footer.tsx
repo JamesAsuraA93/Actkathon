@@ -15,7 +15,7 @@ const customStyles = {
   },
 };
 
-export default function Footer(props) {
+export default function Footer(props:any) {
   let subtitle:any;
   const [modalIsOpen, setIsOpen] = useState(false);
 

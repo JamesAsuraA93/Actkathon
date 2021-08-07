@@ -7,7 +7,7 @@ declare global {
 }
 
 const KomChat = () => {
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && !window.kommunicate) {
     let kommunicate = window.kommunicate;
     (function (d, m) {
       var kommunicateSettings = {
