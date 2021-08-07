@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import {useRouter} from "next/router";
 import { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import Thumbnail from "../components/Thumbnail";
@@ -12,6 +12,8 @@ import CheckIn from "../components/CheckIn";
 
 
 export default function Home() {
+  const router = useRouter()
+  const { id } = router.query
   const ref = useRef<HTMLDivElement>(null);
   const mask = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(1);
@@ -86,6 +88,15 @@ export default function Home() {
   const onEnterPage = () => {
     setInPage(!isInPage);
   };
+
+  useEffect(()=>{
+    if(id){
+      setInPage(!isInPage);
+    }
+  },[id])
+
+
+
   return (
     <>
       {!isInPage && (
@@ -117,19 +128,25 @@ export default function Home() {
         <div>
           <Navbar />
         </div>
-        <div className="grid grid-cols-7 content mt-6 pt-24 mb-0 pb-0">
+        
+        {/* <div className="grid grid-cols-7 content mt-6 pt-24 mb-0 pb-0">
           <div className="col-start-3 col-span-5">
             <Topic />
           </div>
-        </div>
-
-        <div className="h-full font-sarabun pt-0 -mt-24">
-          <div className="content flex flex-col justify-center place-items-center w-full h-full">
-            <div className="mb-4">
-              <h3 className="font-black text-lg font-iconic mb-12">
+        </div> */}
+<div className="absolute flex w-screen">
+          <div className="mx-auto w-92 mt-32" style={{width:490}}>
+            <Topic />
+            <div className="w-full text-center mt-12">
+              <h3 className="font-black text-lg font-iconic">
                 โครงการรอบตัวคุณ
               </h3>
             </div>
+        </div>
+        </div>
+
+        <div className="h-full font-sarabun pt-0">
+          <div className="content flex flex-col justify-center place-items-center w-full h-full overflow-hidden">
             <div className="w-full">
               <div className="flex flex-row justify-center place-items-center w-full h-full m-0 p-0">
                 <div

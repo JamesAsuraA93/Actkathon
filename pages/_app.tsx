@@ -15,7 +15,10 @@ declare global {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Script src="https://d3js.org/d3.v4.js"></Script>
+    
       <Component {...pageProps} />
+
       <Script
         type="module"
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -24,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         noModule
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
       ></Script>
+
     </>
   );
 }

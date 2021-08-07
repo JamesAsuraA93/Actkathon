@@ -81,12 +81,12 @@ export default function Thumbnail({
            {i > currentPage - 1 && i < currentPage + 4 && <div className="grid justify-items-center m-1">{disDoc[i].detailName}</div>}
            {i > currentPage - 1 && i < currentPage + 4 && <div className="flex mt-5">
              <div className="h-12 w-11 border-2 border-earth-green bg-white object-center">
-               <div className="grid justify-items-center mt-2">
-               👍🏻
+               <div className="grid justify-items-center mt-2 text-xl">
+               💸
                </div>
               </div>
-             <button className="h-12 w-32 border border-earth-green border-b border-r border-t bg-white">
-               <h1 className="font-normal text-sm p-1">กดเพื่อตรวจสอบ    รายละเอียด</h1>
+             <button className="h-12 w-32 border border-earth-green border-b-2 border-r-2 border-t-2 bg-white">
+               <h1 className="font-normal p-1 font-iconic text-gray-700">ช่วยตรวจสอบ</h1>
                <Modal/>
              </button>
              </div>}

@@ -4,11 +4,11 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const people = [
-  { id: 1, name: "โครงการรอบตัวคุณ" },
-  { id: 2, name: "งบกลาง" },
-  { id: 3, name: "กระทรวงศึกษาธิการ" },
-  { id: 4, name: "กระทรวงการคลัง" },
-  { id: 5, name: "กระทรวงมหาดไทย" },
+  { id: 1,name: "โครงการรอบตัวคุณ" },
+  { id: 2,name: "งบกลาง" },
+  { id: 3,name: "กระทรวงศึกษาธิการ" },
+  { id: 4,name: "กระทรวงการคลัง" },
+  { id: 5,name: "กระทรวงมหาดไทย" },
 ];
 
 function classNames(...classes: any[]) {
@@ -23,7 +23,7 @@ export default function Example() {
       {({ open }) => (
         <>
           <div className="mt-1 relative">
-            <Listbox.Button className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400 sm:text-sm">
+            <Listbox.Button className="relative w-full rounded-md pl-3 pr-10 py-2 text-left cursor-default bg-transparent">
               <span className="block truncate">{selected.name}</span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon
