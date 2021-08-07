@@ -142,10 +142,10 @@ export default function Modal(props) {
           </div>
         </div>
         <div className="px-5 pb-5 flex text-sm">
-        <div className="border-earth-green border-2 p-3" onClick={()=>props.voter[1]([...props.voter[0],{id:id,status:"ok"}])}>
+        <div className="border-earth-green border-2 p-3" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
           สมเหตุสมผล
         </div>
-        <div className="ml-3 border-red-400 border-2 p-3" onClick={()=>props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}])}>
+        <div className="ml-3 border-red-400 border-2 p-3" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
           อาจมีการทุจริต
         </div>
         </div>

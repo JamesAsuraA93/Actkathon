@@ -1,6 +1,5 @@
-import { data } from "autoprefixer";
-import { useEffect, useRef } from "react";
-export default (props) => {
+import { useEffect } from "react";
+export default function Bub(props) {
   useEffect(() => {
     window.document.querySelector("#my_dataviz").innerHTML = "";
     if (window.d3) {
@@ -76,4 +75,4 @@ export default (props) => {
   }, [props.data, window.d3]);
 
   return <div id="my_dataviz"></div>;
-};
+}
