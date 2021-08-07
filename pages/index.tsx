@@ -118,7 +118,7 @@ export default function Home() {
           <Navbar />
         </div>
         <div className="grid grid-cols-7 content mt-6 pt-24 mb-0 pb-0">
-          <div className="col-start-3 col-span-4">
+          <div className="col-start-3 col-span-5">
             <Topic />
           </div>
         </div>
