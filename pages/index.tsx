@@ -141,7 +141,7 @@ setPref({
         </div>
         </div>
 
-        <div className="h-full font-sarabun pt-0 mt-24">
+        <div className="h-full font-sarabun pt-0 mt-12">
           <div className="content flex flex-col justify-center place-items-center w-full h-full overflow-hidden">
             <div className="w-full">
               <div className="flex flex-row justify-center place-items-center w-full h-full m-0 p-0">

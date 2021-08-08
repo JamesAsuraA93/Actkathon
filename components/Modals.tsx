@@ -126,7 +126,7 @@ export default function Modal(props) {
         <div className="">
           <Bubble data={actDoc} id={preference.projectId}></Bubble>
           <div className="text-center text-xs">
-            งบประมาณของโครงการนี้เทียบกับโครงการ{" "}
+            งบประมาณของโครงการนี้ <div className=""></div> เทียบกับโครงการ{" "}
             {generateFromOccupation(preference.occupation)} อื่นๆใน{" "}
             {preference.location}
           </div>
