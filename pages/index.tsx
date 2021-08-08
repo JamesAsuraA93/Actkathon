@@ -127,7 +127,7 @@ export default function Home() {
           <Navbar searcher={[search, setSearchKey]} />
         </div>
 
-        <div className="grid grid-cols-9 content mt-32 -mb-24">
+        <div className="grid grid-cols-9 content mt-32 -mb-12">
           <div className="col-start-3 col-span-5 flex justify-center pr-10">
             <Topic />
           </div>
@@ -137,7 +137,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="h-full font-sarabun pt-0 -mt-48">
+        <div className="h-full font-sarabun pt-0 -mt-24">
           <div className="content flex flex-col justify-center place-items-center w-full h-full overflow-hidden">
             <div className="w-full">
               <div className="flex flex-row justify-center place-items-center w-full h-full m-0 p-0">
