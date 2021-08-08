@@ -128,15 +128,16 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-9 content mt-32 -mb-24">
-          <div className="col-start-3 col-span-5 ml-20 pr-10">
+          <div className="col-start-3 col-span-5 flex justify-center pr-10">
             <Topic />
           </div>
-          <div className="col-start-5 col-end-6 content mt-28 -mb-28">
+          
+          <div className="col-start-3 col-span-5 flex justify-center mt-12 pr-10">
             <h3 className="font-black text-lg font-iconic">โครงการรอบตัวคุณ</h3>
           </div>
         </div>
 
-        <div className="h-full font-sarabun pt-0 mt-12">
+        <div className="h-full font-sarabun pt-0 -mt-48">
           <div className="content flex flex-col justify-center place-items-center w-full h-full overflow-hidden">
             <div className="w-full">
               <div className="flex flex-row justify-center place-items-center w-full h-full m-0 p-0">
