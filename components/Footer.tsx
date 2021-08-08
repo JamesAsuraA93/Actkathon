@@ -15,7 +15,7 @@ const customStyles = {
   },
 };
 
-export default function Footer(props) {
+export default function Footer(props:any) {
   let subtitle:any;
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -35,7 +35,7 @@ export default function Footer(props) {
     <>
       <div className="flex justify-between footer w-full fixed bottom-0 pb-4">
         <div className="flex flex-row gap-1 mt-2 ml-3">
-          <div>
+          <div className="pt-1">
             <Image
               src={footer}
               alt="Picture of the author"
@@ -43,8 +43,8 @@ export default function Footer(props) {
               height={25}
             />
           </div>
-          <div>
-            <h4 className="text-white">{`ขณะนี้มีโครงการที่ตรวจสอบแล้ว : 1345325 โครงการ`}</h4>
+          <div className="pt-1">
+            <h4 className="text-white mt-1">{`ขณะนี้มีโครงการที่ตรวจสอบแล้ว : 1345325 โครงการ`}</h4>
           </div>
         </div>
         <div>
