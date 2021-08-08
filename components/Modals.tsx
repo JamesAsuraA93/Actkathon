@@ -111,7 +111,7 @@ export default function Modal(props:any) {
             <div className="px-3"> คือโครงการที่{currentData?._source?.winnerName ?? ""}เคยทำและมีการทุจริต</div>
           </div>
 
-          <div className="flex flex-wrap">
+          <div className="flex w-3/4 mx-auto mt-2 flex-wrap">
             {winnerData.map(({ _source }) =>
               _source.isCorrupt ? (
                 <>
@@ -127,10 +127,14 @@ export default function Modal(props:any) {
         </div>
         <div className="">
           <Bubble data={actDoc} id={preference.projectId}></Bubble>
+          <div className="flex w-min mx-auto" style={{whiteSpace: "nowrap"
+}}>
+          <div className="w-2 h-2 rounded-full mt-1 mr-1" style={{backgroundColor:"#F28A8A"}}></div>
           <div className="text-center text-xs">
-            งบประมาณของโครงการนี้ <div className=""></div> เทียบกับโครงการ{" "}
+            งบประมาณของโครงการนี้เทียบกับโครงการ{" "}
             {generateFromOccupation(preference.occupation)} อื่นๆใน{" "}
             {preference.location}
+          </div>
           </div>
         </div>
         <div className="p-5">
@@ -143,15 +147,34 @@ export default function Modal(props:any) {
             คุณคิดว่าราคานี้สมเหตุสมผลไหม
           </div>
         </div>
-        <div className="px-5 pb-5 flex text-sm">
-        <div className="transition-all delay-100 border-earth-green border-2 p-3 cursor-pointer hover:bg-earth-green hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
-          สมเหตุสมผล
+        <div className="px-5">
+            ให้คะแนนความสมเหตุสมผลของราคา (สมเหตุสมผล 5, ไม่สมเหตุสมผล 1)
+          </div>
+        <div className="px-5 pb-5 flex text-sm pt-2">
+
+          
+        <div className=" ml-2 transition-all delay-100 border-earth-green border-2 p-3 cursor-pointer hover:bg-earth-green hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
+        5
+        </div><div className=" ml-2 transition-all delay-100 border-earth-green border-2 p-3 cursor-pointer hover:bg-earth-green hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
+        4
+        </div><div className=" ml-2 transition-all delay-100 border-earth-green border-2 p-3 cursor-pointer hover:bg-earth-green hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"ok"}]);router.push("/");}}>
+        3
         </div>
         <div className="transition-all delay-100 ml-3 border-red-400 border-2 p-3 cursor-pointer hover:bg-red-400 hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
-          อาจมีการทุจริต
+          2
+        </div>
+        <div className=" ml-2 transition-all delay-100 ml-3 border-red-400 border-2 p-3 cursor-pointer hover:bg-red-400 hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
+          1
         </div>
         </div>
-        
+        <div className="p-5">
+            หรือคุณคิดว่าโครงการนี้ไม่มีประโยชน์ ?
+          </div>
+          <div className="flex px-5">
+          <div className=" ml-2 transition-all delay-100 ml-3 border-red-400 border-2 p-3 cursor-pointer hover:bg-red-400 hover:text-white" onClick={()=>{props.voter[1]([...props.voter[0],{id:id,status:"corrupt"}]);router.push("/");}}>
+          ใช่ โครงการนี้ไม่มีประโยชน์
+        </div>
+        </div>
       </div>
     </div>
 
