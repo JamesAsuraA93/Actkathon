@@ -33,7 +33,7 @@ const [location,setLocation] = useState("")
         </div>
         <div className="font-sarabun">
             <label htmlFor="asking">
-            <h2 className="text-xl font-bold mb-2 font-iconic">ต้องการจะตรวจสอบหน่วยงานไหนคะ ?</h2>
+            <h2 className="text-xl font-bold mb-2 font-iconic">คุณเป็นใครใน 4 คนนี้ ?</h2>
             </label>
             <button onClick={()=>setOccupation("student")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "student" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>นักเรียน</button>
             <button onClick={()=>setOccupation("doctor")} className={`px-3 py-1 rounded-lg transition-colors delay-100 ${occupation === "doctor" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"}`}>พยาบาล</button>
