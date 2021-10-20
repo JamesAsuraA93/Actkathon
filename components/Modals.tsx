@@ -27,7 +27,7 @@ export default function Modal(props:any) {
       if(id){
       const data = await fetchDataACT(query(preference));
       setActDoc(data);
-      const _currentData = data.find((i) => {
+      const _currentData = data.find((i:any) => {
         return i._source.projectId === preference.projectId;
       });
       setCurrentData(_currentData);
