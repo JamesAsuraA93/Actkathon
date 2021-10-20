@@ -21,7 +21,9 @@ export default function Home() {
   const { id } = router.query;
   const ref = useRef<HTMLDivElement>(null);
   const mask = useRef<HTMLDivElement>(null);
+
   const [page, setPage] = useState(2);
+
   const [isInPage, setInPage] = useState(id != undefined);
 
   const [actDoc, setActDoc] = useState([]);
@@ -54,7 +56,7 @@ export default function Home() {
   }, [preference, search]);
 
   const [data, setData] = useState<any>([]);
-
+  
   useEffect(() => {
     setData(
       actDoc.map(({ _source }) => {
@@ -88,8 +90,15 @@ export default function Home() {
     setPage(1);
   };
 
+  // const nameArrowFunction = () => {
+  //   setInPage(!isInPage);
+  //   setPage(1);
+  // };
+  
+
   return (
     <>
+    {/* {Variable && .if True do()} */}
       {!isInPage && (
         <div
           className="h-screen w-screen m-0 p-0 z-50 bg-black bg-opacity-70 absolute"
